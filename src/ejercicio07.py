@@ -36,9 +36,34 @@ def calcular_precio_final(importe: float, es_premium: bool) -> tuple[float, floa
             * >= 500€: 20%
         - Descuento premium: 5% adicional sobre el precio ya descontado
     """
-    # TODO: Implementar la función
-    return (0.0, 0.0, 0.0)
+    # IMPLEMENTACIÓN DE LA FUNCIÓN
 
+    if importe <= 0:
+        return (0.0, 0.0, 0.0)
+
+    porcentaje = 0.0
+    descuento_premium = 0.0
+    importe_final = 0.0
+
+    if importe < 100:
+        porcentaje = 0
+    elif 100 <= importe <= 199:
+        porcentaje = 0.1
+    elif 200 <= importe <= 499:
+        porcentaje = 0.15
+    elif importe >= 500:
+        porcentaje = 0.2
+
+    descuento_volumen = importe*porcentaje
+    subtotal = importe - descuento_volumen
+
+    if not es_premium:
+        importe_final = subtotal
+    if es_premium:
+        descuento_premium = subtotal*0.05
+        importe_final = subtotal-descuento_premium
+
+    return (descuento_volumen, descuento_premium, importe_final)
 
 def solicitar_importe() -> float:
     """
