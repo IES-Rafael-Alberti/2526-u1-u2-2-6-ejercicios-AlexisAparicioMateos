@@ -35,7 +35,7 @@ def simular_carrera(velocidad1: int, velocidad2: int, velocidad3: int, distancia
     """
     # IMPLEMENTACIÓN DE LA FUNCIÓN
 
-    if (velocidad1 or velocidad2 or velocidad3) < 1 or (velocidad1 or velocidad2 or velocidad3) > 10:
+    if not (1 <= velocidad1 <= 10 and 1 <= velocidad2 <= 10 and 1 <= velocidad3 <= 10):
         return (0, 0)
     if distancia_meta <= 0:
         return (0, 0)
@@ -44,23 +44,20 @@ def simular_carrera(velocidad1: int, velocidad2: int, velocidad3: int, distancia
     caracol2 = 2
     caracol3 = 3
 
-    if velocidad1 > velocidad2 and velocidad1 > velocidad3 or (velocidad1 == velocidad2 == velocidad3):
+    if velocidad1 >= velocidad2 and velocidad1 >= velocidad3:
         velocidad_mas_alta = velocidad1
         ganador = caracol1
-    elif velocidad2 > velocidad1 and velocidad2 > velocidad3:
+    elif velocidad2 >= velocidad1 and velocidad2 >= velocidad3:
         velocidad_mas_alta = velocidad2
         ganador = caracol2
     else:
         velocidad_mas_alta = velocidad3
         ganador = caracol3
 
-    if velocidad1 < velocidad2 == velocidad3:
-        velocidad_mas_alta = velocidad2
-        ganador = caracol2
-
     turnos_necesarios = distancia_meta//velocidad_mas_alta
 
-    if distancia_meta/velocidad_mas_alta >
+    if distancia_meta%velocidad_mas_alta != 0:
+        turnos_necesarios = distancia_meta//velocidad_mas_alta+1
 
     return(ganador, turnos_necesarios)
 
